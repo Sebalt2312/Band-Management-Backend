@@ -1,10 +1,7 @@
 package org.acme.rest.client.entity;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 import org.acme.rest.client.enums.Instrument;
 
 import javax.persistence.Entity;
@@ -15,6 +12,8 @@ import java.util.List;
 
 @Entity
 @Data
+@ToString
+@EqualsAndHashCode
 @NoArgsConstructor
 @RequiredArgsConstructor
 @AllArgsConstructor

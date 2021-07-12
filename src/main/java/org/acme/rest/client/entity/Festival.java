@@ -7,11 +7,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
-import java.util.Date;
 import java.util.List;
 
 @Entity
 @Data
+@ToString
+@EqualsAndHashCode
 @NoArgsConstructor
 @RequiredArgsConstructor
 @AllArgsConstructor

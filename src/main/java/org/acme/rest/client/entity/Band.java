@@ -12,6 +12,8 @@ import java.util.List;
 
 @Entity
 @Data
+@ToString
+@EqualsAndHashCode
 @NoArgsConstructor
 @RequiredArgsConstructor
 @AllArgsConstructor
