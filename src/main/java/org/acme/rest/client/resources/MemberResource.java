@@ -10,16 +10,15 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import java.util.List;
 
-@Path("/member")
 @GraphQLApi
 public class MemberResource {
 
-    @GET
+    @Query("member")
     public List<Member> getAll() {
         return Member.findAll().list();
     }
 
-    @Query
+    @Query("findByMemberName")
     public Member getMember(@Name("name") String name) {
         return Member.findByName(name);
     }

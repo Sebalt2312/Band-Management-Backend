@@ -8,6 +8,7 @@ import org.acme.rest.client.entity.Band;
 import org.eclipse.microprofile.graphql.*;
 
 import javax.transaction.Transactional;
+import java.util.Comparator;
 import java.util.List;
 
 @GraphQLApi
