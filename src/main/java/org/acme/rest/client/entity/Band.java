@@ -3,39 +3,52 @@ package org.acme.rest.client.entity;
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 import lombok.*;
 import org.acme.rest.client.enums.Genre;
+import org.eclipse.microprofile.graphql.Mutation;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.*;
+import javax.transaction.Transactional;
+import java.io.Console;
 import java.util.List;
 
 @Entity
 @Data
-@ToString
-@EqualsAndHashCode
-@NoArgsConstructor
-@RequiredArgsConstructor
+@Builder
+@Table(name = "band")
 @AllArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PUBLIC)
 public class Band extends PanacheEntityBase {
 
   @Id
   @GeneratedValue
-  private int id;
+  private Long id;
 
-  @NonNull
   private String bandName;
 
   private Genre genre;
 
-  @ManyToMany
+  @OneToMany(mappedBy = "band")
   private List<Member> member;
 
-  @ManyToMany
+
+  @ManyToMany(mappedBy = "bands")
   private List<Concert> concerts;
 
-  @ManyToMany
+  @ManyToMany(mappedBy = "bands")
   private List<Festival> festivals;
 
+
+  @Mutation
+  @Transactional
+  public static String create(String name, String genre) {
+    Band band = Band.builder()
+            .bandName(name)
+            .genre(Genre.getGenre(genre)).build();
+    Band.persist(band);
+    return band.bandName;
+  }
+
+  public static Band findByName(String name){
+    return find("bandName", name).firstResult();
+  }
 
 }

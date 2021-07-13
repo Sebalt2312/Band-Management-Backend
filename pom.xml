@@ -31,31 +31,19 @@
   <dependencies>
     <dependency>
       <groupId>io.quarkus</groupId>
-      <artifactId>quarkus-hibernate-orm</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>io.quarkus</groupId>
-      <artifactId>quarkus-rest-client</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>io.quarkus</groupId>
-      <artifactId>quarkus-rest-client-jackson</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>io.quarkus</groupId>
-      <artifactId>quarkus-jdbc-mssql</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>io.quarkus</groupId>
       <artifactId>quarkus-hibernate-orm-panache</artifactId>
     </dependency>
     <dependency>
       <groupId>io.quarkus</groupId>
-      <artifactId>quarkus-liquibase</artifactId>
+      <artifactId>quarkus-resteasy-jackson</artifactId>
     </dependency>
     <dependency>
       <groupId>io.quarkus</groupId>
-      <artifactId>quarkus-reactive-messaging-http</artifactId>
+      <artifactId>quarkus-smallrye-graphql</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-jdbc-postgresql</artifactId>
     </dependency>
     <dependency>
       <groupId>io.quarkus</groupId>
@@ -64,6 +52,10 @@
     <dependency>
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-resteasy</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-reactive-pg-client</artifactId>
     </dependency>
     <dependency>
       <groupId>io.quarkus</groupId>
@@ -80,11 +72,6 @@
       <artifactId>lombok</artifactId>
       <version>1.18.20</version>
       <scope>provided</scope>
-    </dependency>
-    <dependency>
-      <groupId>io.quarkus</groupId>
-      <artifactId>quarkus-smallrye-graphql</artifactId>
-      <version>2.0.1.Final</version>
     </dependency>
   </dependencies>
   <build>

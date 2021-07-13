@@ -3,25 +3,21 @@ package org.acme.rest.client.entity;
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 
 @Entity
 @Data
-@ToString
-@EqualsAndHashCode
-@NoArgsConstructor
-@RequiredArgsConstructor
+@Builder
+@Table(name = "concert")
 @AllArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PUBLIC)
 public class Concert  extends PanacheEntityBase {
 
   @Id
   @GeneratedValue
-  private int id;
+  private Long id;
 
   private String name;
 
@@ -29,8 +25,16 @@ public class Concert  extends PanacheEntityBase {
   private Date date;
 
   @NonNull
-  @ManyToMany
+  @ManyToMany(cascade = CascadeType.ALL)
+  @JoinTable(
+          name = "concerts_bands",
+          joinColumns = { @JoinColumn(name = "band_id") },
+          inverseJoinColumns = { @JoinColumn(name = "concert_id") }
+  )
   private List<Band> bands;
 
+  public static Concert findByName(String name){
+    return Concert.find("name", name).firstResult();
+  }
 
 }

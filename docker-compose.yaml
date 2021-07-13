@@ -1,0 +1,19 @@
+version: "3.9"  # optional since v1.27.0
+services:
+  testdb:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: SuperSecret
+      POSTGRES_DB: testdb
+    ports:
+      - "5431:5432"
+  pgadmin:
+    container_name: pgadmin4
+    image: dpage/pgadmin4
+    ports:
+      - "80:80"
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=user@domain.com
+      - PGADMIN_DEFAULT_PASSWORD=SuperSecret
+    restart: always
