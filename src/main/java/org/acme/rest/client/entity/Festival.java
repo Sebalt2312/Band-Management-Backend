@@ -6,6 +6,7 @@ import org.eclipse.microprofile.graphql.Mutation;
 
 import javax.persistence.*;
 import javax.transaction.Transactional;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -23,6 +24,12 @@ public class Festival   extends PanacheEntityBase {
   @NonNull
   private String name;
 
+  @NonNull
+  private Date startDate;
+
+  @NonNull
+  private Date endDate;
+
   @ManyToMany(cascade = CascadeType.ALL)
   @JoinTable(
           name = "festivals_bands",
@@ -36,9 +43,17 @@ public class Festival   extends PanacheEntityBase {
 
   @Mutation
   @Transactional
-  public static Festival create(String name) {
-    Festival festival = Festival.builder().name(name).build();
+  public static Festival create(String name, Date startDate, Date endDate) {
+    Festival festival = Festival.builder().name(name).startDate(startDate).endDate(endDate).build();
     Festival.persist(festival);
     return festival;
+  }
+
+  public static String addBand(String festivalName, String bandName) {
+    Festival festival = Festival.findByName(festivalName);
+    Band band = Band.findByName(bandName);
+    festival.getBands().add(band);
+    Festival.persist(festival);
+    return band.getBandName() + " booked for Festival: " + festival.getName();
   }
 }

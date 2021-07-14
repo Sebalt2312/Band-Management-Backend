@@ -7,13 +7,16 @@ import org.acme.rest.client.entity.Member;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 @Startup
 @ApplicationScoped
 public class TestDataBean {
 
     @Inject
-    public TestDataBean() {
+    public TestDataBean() throws ParseException {
         if (Band.listAll().isEmpty()) {
             Band.create("Die Ärzte", "Punk");
             Band.create("Die Toten Hosen", "Punk");
@@ -32,8 +35,12 @@ public class TestDataBean {
             Member.create("Zach", "Guitar");
         }
         if(Festival.listAll().isEmpty()) {
-            Festival.create("Full Force");
-            Festival.create("Reload");
+            Festival.create("Full Force",
+                                  new SimpleDateFormat("dd.MM.yyyy").parse("24.06.2022"),
+                                  new SimpleDateFormat("dd.MM.yyyy").parse("26.06.2022"));
+            Festival.create("Reload",
+                                  new SimpleDateFormat("dd.MM.yyyy").parse("18.08.2022"),
+                                  new SimpleDateFormat("dd.MM.yyyy").parse("20.08.2022"));
         }
     }
 

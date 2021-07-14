@@ -44,7 +44,7 @@ public class Concert extends PanacheEntityBase {
       concert.getBands().add(nextBand);
     }
     Concert.persist(concert);
-    return concert.getName();
+    return "Concert " + concert.getName() + " booked.";
   }
 
   public static String addBand(String concertName, String bandName) {
@@ -52,7 +52,7 @@ public class Concert extends PanacheEntityBase {
     Band band = Band.findByName(bandName);
     concert.getBands().add(band);
     Concert.persist(concert);
-    return band.getBandName();
+    return band.getBandName() + " booked for Concert on: " + concert.getDate();
   }
 
 }

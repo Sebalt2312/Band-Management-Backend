@@ -2,10 +2,12 @@ package org.acme.rest.client.resources;
 
 import io.quarkus.test.junit.QuarkusTest;
 import io.restassured.http.ContentType;
+import org.eclipse.microprofile.graphql.Ignore;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
 
 import static io.restassured.RestAssured.given;
+import static org.hamcrest.Matchers.is;
 
 @QuarkusTest
 class BandResourceTest {
@@ -66,9 +68,10 @@ class BandResourceTest {
                 .post("/graphql")
                 .then()
                 .statusCode(200)
-                .body("data.createBand", Matchers.not(Matchers.emptyArray()));
+                .body("data.createBand", is("The Ghost Inside"));
     }
 
+    @Ignore
     @Test
     void bandCreated() {
     }
