@@ -24,7 +24,7 @@ public class BandResource {
 
     @Query("findByBandName")
     @Description("Get a Band with its members by Name.")
-    public Band findByBandName(@Name("bandName") String bandName) {
+    public Band getByBandName(@Name("bandName") String bandName) {
         return Band.findByName(bandName);
     }
 
