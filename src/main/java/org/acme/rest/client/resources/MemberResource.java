@@ -23,7 +23,7 @@ public class MemberResource {
         return Member.findByName(name);
     }
 
-    @Query("findByBandName")
+    @Query("findMemberByBandName")
     public List<Member> findByBand(@Name("bandName") String bandName) {
         return Member.findByBand(bandName);
     }

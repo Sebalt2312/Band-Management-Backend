@@ -7,7 +7,6 @@ import org.eclipse.microprofile.graphql.Mutation;
 
 import javax.persistence.*;
 import javax.transaction.Transactional;
-import java.io.Console;
 import java.util.List;
 
 @Entity
@@ -39,12 +38,20 @@ public class Band extends PanacheEntityBase {
 
   @Mutation
   @Transactional
-  public static String create(String name, String genre) {
+  public static Band create(String name, String genre) {
     Band band = Band.builder()
             .bandName(name)
             .genre(Genre.getGenre(genre)).build();
     Band.persist(band);
-    return band.bandName;
+    return band;
+  }
+
+  @Mutation
+  @Transactional
+  public static String remove(int id) {
+    Band band = Band.findById(id);
+    Band.remove(id);
+    return band.getBandName();
   }
 
   public static Band findByName(String name){

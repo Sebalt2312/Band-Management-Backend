@@ -8,7 +8,6 @@ import org.acme.rest.client.entity.Band;
 import org.eclipse.microprofile.graphql.*;
 
 import javax.transaction.Transactional;
-import java.util.Comparator;
 import java.util.List;
 
 @GraphQLApi
@@ -31,7 +30,16 @@ public class BandResource {
     @Mutation
     @Transactional
     public String createBand(@Name("bandName") String bandName, @Name("genre") String genre) {
-        return Band.create(bandName, genre);
+        Band band = Band.create(bandName, genre);
+        processor.onNext(band);
+        return band.getBandName();
+    }
+
+    @Mutation
+    @Transactional
+    public String removeBand(@Name("id") int id) {
+        String bandName = Band.remove(id);
+        return bandName;
     }
 
     @Subscription
