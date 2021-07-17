@@ -27,7 +27,6 @@ class BandResourceTest {
                         "    }\n" +
                         "   } \n" +
                         "  }\"\n" +
-                        "}" +
                         "}")
                 .post("/graphql")
                 .then()
